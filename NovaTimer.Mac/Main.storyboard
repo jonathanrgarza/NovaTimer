@@ -667,13 +667,15 @@
                             <allowedToolbarItems>
                                 <toolbarItem implicitItemIdentifier="FF28624F-BBC8-4464-A009-C16E62DB1C94" label="Minutes" paletteLabel="Minutes" id="S3H-cq-Jna">
                                     <nil key="toolTip"/>
-                                    <size key="minSize" width="20" height="21"/>
+                                    <size key="minSize" width="50" height="21"/>
                                     <size key="maxSize" width="96" height="21"/>
                                     <textField key="view" verticalHuggingPriority="750" id="Q0x-M9-B0H">
                                         <rect key="frame" x="0.0" y="14" width="96" height="21"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="4fr-8h-8Rs">
-                                            <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="decimal" formatWidth="-1" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" maximumFractionDigits="3" id="sni-Ip-Ggt"/>
+                                            <numberFormatter key="formatter" formatterBehavior="custom10_4" numberStyle="decimal" allowsFloats="NO" usesGroupingSeparator="NO" formatWidth="-1" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" id="sni-Ip-Ggt">
+                                                <real key="minimum" value="1"/>
+                                            </numberFormatter>
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -728,23 +730,22 @@
                         <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="s9a-CU-rMA">
+                            <textField verticalHuggingPriority="750" fixedFrame="YES" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bdi-p2-BfT">
                                 <rect key="frame" x="20" y="20" width="440" height="230"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="center" drawsBackground="YES" usesSingleLineMode="YES" id="fkd-g1-hxl">
-                                    <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="decimal" formatWidth="-1" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" maximumFractionDigits="3" id="RYx-j6-ThQ"/>
-                                    <font key="font" metaFont="system"/>
+                                <textFieldCell key="cell" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" alignment="center" placeholderString="Format: ##:##:##" drawsBackground="YES" usesSingleLineMode="YES" id="2J7-4h-ynb">
+                                    <font key="font" textStyle="largeTitle" name=".SFNS-Regular"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                    <connections>
-                                        <action selector="OnTimerFieldEnter:" target="XfG-lQ-9wD" id="4N7-Aq-uqx"/>
-                                    </connections>
                                 </textFieldCell>
+                                <connections>
+                                    <action selector="OnTimerFieldEnter:" target="XfG-lQ-9wD" id="VWT-45-KVf"/>
+                                </connections>
                             </textField>
                         </subviews>
                     </view>
                     <connections>
-                        <outlet property="TimerField" destination="s9a-CU-rMA" id="oQV-sf-szL"/>
+                        <outlet property="TimerField" destination="Bdi-p2-BfT" id="oWA-ts-xab"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
