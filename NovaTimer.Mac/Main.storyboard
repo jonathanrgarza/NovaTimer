@@ -658,12 +658,12 @@
         <scene sceneID="R2V-B0-nI4">
             <objects>
                 <windowController id="B8D-0N-5wS" sceneMemberID="viewController">
-                    <window key="window" title="Nova Timer" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
+                    <window key="window" title="Nova Timer" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" toolbarStyle="expanded" id="IQv-IB-iLA">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="196" y="240" width="480" height="270"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
-                        <toolbar key="toolbar" implicitIdentifier="200AB679-61B2-46A9-B5FA-891067CF22B2" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="U9u-zP-SXk">
+                        <toolbar key="toolbar" implicitIdentifier="E051C646-1DB2-4D98-AC05-2992D141E02B" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="U9u-zP-SXk">
                             <allowedToolbarItems>
                                 <toolbarItem implicitItemIdentifier="F21BEBF3-9CC3-414D-8F0A-41D211646CB3" label="Play" paletteLabel="Play" tag="-1" bordered="YES" id="hMB-kw-Vtl">
                                     <size key="minSize" width="12" height="25"/>
