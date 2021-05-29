@@ -665,6 +665,21 @@
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
                         <toolbar key="toolbar" implicitIdentifier="E051C646-1DB2-4D98-AC05-2992D141E02B" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="U9u-zP-SXk">
                             <allowedToolbarItems>
+                                <toolbarItem implicitItemIdentifier="FF28624F-BBC8-4464-A009-C16E62DB1C94" label="Minutes" paletteLabel="Minutes" id="S3H-cq-Jna">
+                                    <nil key="toolTip"/>
+                                    <size key="minSize" width="20" height="21"/>
+                                    <size key="maxSize" width="96" height="21"/>
+                                    <textField key="view" verticalHuggingPriority="750" id="Q0x-M9-B0H">
+                                        <rect key="frame" x="0.0" y="14" width="96" height="21"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="4fr-8h-8Rs">
+                                            <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="decimal" formatWidth="-1" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" maximumFractionDigits="3" id="sni-Ip-Ggt"/>
+                                            <font key="font" metaFont="system"/>
+                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="F21BEBF3-9CC3-414D-8F0A-41D211646CB3" label="Play" paletteLabel="Play" tag="-1" bordered="YES" id="hMB-kw-Vtl">
                                     <size key="minSize" width="12" height="25"/>
                                     <size key="maxSize" width="12" height="25"/>
@@ -677,6 +692,7 @@
                                 <toolbarItem implicitItemIdentifier="NSToolbarShowFontsItem" id="ZrA-1D-ukz"/>
                             </allowedToolbarItems>
                             <defaultToolbarItems>
+                                <toolbarItem reference="S3H-cq-Jna"/>
                                 <toolbarItem reference="hMB-kw-Vtl"/>
                                 <toolbarItem reference="zhq-ha-TF7"/>
                                 <toolbarItem reference="Dh3-TF-v6J"/>
@@ -704,7 +720,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="s9a-CU-rMA">
-                                <rect key="frame" x="20" y="20" width="440" height="179"/>
+                                <rect key="frame" x="20" y="20" width="440" height="230"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="center" drawsBackground="YES" usesSingleLineMode="YES" id="fkd-g1-hxl">
                                     <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="decimal" formatWidth="-1" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" maximumFractionDigits="3" id="RYx-j6-ThQ"/>
