@@ -30,5 +30,25 @@ namespace NovaTimer.Mac
                 // Update the view, if already loaded.
             }
         }
+
+        partial void OnTimerFieldEnter(NSObject sender)
+        {
+            
+        }
+
+        partial void OnToolbarMinutesFieldEnter(NSObject sender)
+        {
+            throw new NotImplementedException();
+        }
+
+        partial void OnToolbarPlayToggleButtonPressed(NSObject sender)
+        {
+            throw new NotImplementedException();
+        }
+
+        partial void OnToolbarStopButtonPressed(NSObject sender)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

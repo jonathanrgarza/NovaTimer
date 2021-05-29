@@ -679,14 +679,23 @@
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
+                                    <connections>
+                                        <action selector="OnToolbarMinutesFieldEnter:" target="Oky-zY-oP4" id="Vcg-ed-5AK"/>
+                                    </connections>
                                 </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="F21BEBF3-9CC3-414D-8F0A-41D211646CB3" label="Play" paletteLabel="Play" tag="-1" bordered="YES" id="hMB-kw-Vtl">
                                     <size key="minSize" width="12" height="25"/>
                                     <size key="maxSize" width="12" height="25"/>
+                                    <connections>
+                                        <action selector="OnToolbarPlayToggleButtonPressed:" target="Oky-zY-oP4" id="DkT-DB-x5B"/>
+                                    </connections>
                                 </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="B5014DF5-3EA7-474B-A82A-D354EE1C3F63" label="Stop" paletteLabel="Stop" tag="-1" bordered="YES" id="zhq-ha-TF7">
                                     <size key="minSize" width="12" height="25"/>
                                     <size key="maxSize" width="12" height="25"/>
+                                    <connections>
+                                        <action selector="OnToolbarStopButtonPressed:" target="Oky-zY-oP4" id="bjm-dc-TQk"/>
+                                    </connections>
                                 </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="Dh3-TF-v6J"/>
                                 <toolbarItem implicitItemIdentifier="NSToolbarShowFontsItem" id="ZrA-1D-ukz"/>
@@ -727,10 +736,16 @@
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    <connections>
+                                        <action selector="OnTimerFieldEnter:" target="XfG-lQ-9wD" id="4N7-Aq-uqx"/>
+                                    </connections>
                                 </textFieldCell>
                             </textField>
                         </subviews>
                     </view>
+                    <connections>
+                        <outlet property="TimerField" destination="s9a-CU-rMA" id="oQV-sf-szL"/>
+                    </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
