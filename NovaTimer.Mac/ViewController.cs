@@ -33,7 +33,7 @@ namespace NovaTimer.Mac
 
         partial void OnTimerFieldEnter(NSObject sender)
         {
-            if (sender is not NSTextField textField)
+            if (!(sender is NSTextField textField))
                 return;
 
             string value = textField.StringValue;
@@ -42,7 +42,7 @@ namespace NovaTimer.Mac
 
         partial void OnToolbarMinutesFieldEnter(NSObject sender)
         {
-            if (sender is not NSTextField textField)
+            if (!(sender is NSTextField textField))
                 return;
 
             int value = textField.IntValue;
