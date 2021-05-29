@@ -33,12 +33,20 @@ namespace NovaTimer.Mac
 
         partial void OnTimerFieldEnter(NSObject sender)
         {
-            
+            if (sender is not NSTextField textField)
+                return;
+
+            string value = textField.StringValue;
+            //TODO Do something with value
         }
 
         partial void OnToolbarMinutesFieldEnter(NSObject sender)
         {
-            throw new NotImplementedException();
+            if (sender is not NSTextField textField)
+                return;
+
+            int value = textField.IntValue;
+            //TODO Do something with value
         }
 
         partial void OnToolbarPlayToggleButtonPressed(NSObject sender)
