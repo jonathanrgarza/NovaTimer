@@ -27,9 +27,13 @@
     <IncludeMonoRuntime>false</IncludeMonoRuntime>
     <UseSGen>true</UseSGen>
     <UseRefCounting>true</UseRefCounting>
+    <PackageSigningKey>3rd Party Mac Developer Installer</PackageSigningKey>
+    <LinkMode>None</LinkMode>
+    <AOTMode>None</AOTMode>
+    <XamMacArch>x86_64</XamMacArch>
+    <LangVersion>9.0</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
@@ -42,6 +46,9 @@
     <UseRefCounting>true</UseRefCounting>
     <CodeSignEntitlements>Entitlements.plist</CodeSignEntitlements>
     <LinkMode>SdkOnly</LinkMode>
+    <AOTMode>None</AOTMode>
+    <XamMacArch>x86_64</XamMacArch>
+    <LangVersion>9.0</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
