@@ -3,7 +3,7 @@
 using AppKit;
 using Foundation;
 
-namespace NovaTimer.Mac
+namespace NovaTimer.Mac.Controllers
 {
     public partial class ViewController : NSViewController
     {

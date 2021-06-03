@@ -7,7 +7,7 @@
 using Foundation;
 using System.CodeDom.Compiler;
 
-namespace NovaTimer.Mac
+namespace NovaTimer.Mac.Controllers
 {
 	[Register ("ViewController")]
 	partial class ViewController

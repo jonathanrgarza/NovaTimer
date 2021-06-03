@@ -71,6 +71,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
+    <Folder Include="Controllers\" />
+    <Folder Include="Views\" />
+    <Folder Include="Controls\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -79,14 +82,14 @@
   <ItemGroup>
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
-    <Compile Include="ViewController.cs" />
-    <Compile Include="ViewController.designer.cs">
+    <Compile Include="Controllers\ViewController.cs" />
+    <Compile Include="Controllers\ViewController.designer.cs">
       <DependentUpon>ViewController.cs</DependentUpon>
     </Compile>
-    <Compile Include="VerticallyCenteredTextFieldCell.cs" />
+    <Compile Include="Controls\VerticallyCenteredTextFieldCell.cs" />
   </ItemGroup>
   <ItemGroup>
-    <InterfaceDefinition Include="Main.storyboard" />
+    <InterfaceDefinition Include="Views\Main.storyboard" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Mac\Xamarin.Mac.CSharp.targets" />
 </Project>

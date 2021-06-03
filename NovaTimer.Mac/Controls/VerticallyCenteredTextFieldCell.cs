@@ -3,7 +3,7 @@ using AppKit;
 using CoreGraphics;
 using Foundation;
 
-namespace NovaTimer.Mac
+namespace NovaTimer.Mac.Controls
 {
     [Register("VerticallyCenteredTextFieldCell")]
     public class VerticallyCenteredTextFieldCell : NSTextFieldCell
