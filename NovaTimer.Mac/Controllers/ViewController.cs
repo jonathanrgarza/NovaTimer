@@ -2,6 +2,7 @@
 
 using AppKit;
 using Foundation;
+using NovaTimer.Common.Utilities;
 
 namespace NovaTimer.Mac.Controllers
 {
@@ -11,22 +12,16 @@ namespace NovaTimer.Mac.Controllers
     public partial class ViewController : NSViewController
     {
         /// <summary>
-        ///     Initalizes a new instance of <see cref="ViewController"/>.
-        /// </summary>
-        /// <param name="handle">The native handle.</param>
-        public ViewController(IntPtr handle) : base(handle)
-        {
-        }
+		///     A helper shortcut to the app delegate.
+		/// </summary>
+		/// <value>The app.</value>
+		public static AppDelegate App =>
+            (AppDelegate)NSApplication.SharedApplication.Delegate;
 
         /// <summary>
-        ///     Event handler called when the view is loaded into memory.
+        ///     The time utility.
         /// </summary>
-        public override void ViewDidLoad()
-        {
-            base.ViewDidLoad();
-
-            // Do any additional setup after loading the view.
-        }
+        public ITimeUtility TimeUtility { get; private set; }
 
         /// <summary>
         ///     The object whose value is presented in the receiver’s
@@ -49,6 +44,35 @@ namespace NovaTimer.Mac.Controllers
                 base.RepresentedObject = value;
                 // Update the view, if already loaded.
             }
+        }
+
+        /// <summary>
+        ///     Initalizes a new instance of <see cref="ViewController"/>.
+        /// </summary>
+        /// <param name="handle">The native handle.</param>
+        public ViewController(IntPtr handle) : base(handle)
+        {
+        }
+
+        /// <summary>
+        ///     Event handler called when the view is loaded into memory.
+        /// </summary>
+        public override void ViewDidLoad()
+        {
+            base.ViewDidLoad();
+
+            // Do any additional setup after loading the view.
+            SetupDependencies();
+        }
+
+        /// <summary>
+        ///     Sets up the DI dependencies for this class.
+        /// </summary>
+        private void SetupDependencies()
+        {
+            var app = App;
+
+            TimeUtility = app.Container.GetInstance<ITimeUtility>();
         }
 
         /// <summary>

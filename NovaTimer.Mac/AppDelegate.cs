@@ -1,5 +1,7 @@
 ﻿using AppKit;
 using Foundation;
+using NovaTimer.Common.Utilities;
+using SimpleInjector;
 
 namespace NovaTimer.Mac
 {
@@ -9,11 +11,32 @@ namespace NovaTimer.Mac
     [Register("AppDelegate")]
     public class AppDelegate : NSApplicationDelegate
     {
+        private Container _container;
+
+        /// <summary>
+        ///     Gets the DI Container.
+        /// </summary>
+        public Container Container => _container ??= BuildContainer();
+
         /// <summary>
         ///     Initalizes a new instance of <see cref="AppDelegate"/>.
         /// </summary>
         public AppDelegate()
         {
+        }
+
+        /// <summary>
+        ///     Sent by the default notification center immediately before
+        ///     the application object is initialized.
+        /// </summary>
+        /// <param name="notification">
+        ///     A notification named willFinishLaunchingNotification.
+        ///     Calling the object method of this notification returns
+        ///     the NSApplication object itself.
+        /// </param>
+        public override void WillFinishLaunching(NSNotification notification)
+        {
+            //Note: Not called before ViewController.ViewDidLoad
         }
 
         /// <summary>
@@ -58,6 +81,20 @@ namespace NovaTimer.Mac
         public override void WillTerminate(NSNotification notification)
         {
             // Insert code here to tear down your application
+        }
+
+        /// <summary>
+        ///     Sets up the DI container for the application.
+        /// </summary>
+        private Container BuildContainer()
+        {
+            var container = new Container();
+
+            container.Register<ITimeUtility, TimeUtility>(Lifestyle.Singleton);
+
+            container.Verify();
+
+            return container;
         }
     }
 }

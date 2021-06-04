@@ -54,6 +54,9 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="Xamarin.Mac" />
+    <Reference Include="SimpleInjector">
+      <HintPath>..\packages\SimpleInjector.5.3.0\lib\netstandard2.1\SimpleInjector.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json" />
@@ -78,6 +81,7 @@
   <ItemGroup>
     <None Include="Info.plist" />
     <None Include="Entitlements.plist" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Main.cs" />
@@ -90,6 +94,12 @@
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Views\Main.storyboard" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NovaTimer.Common\NovaTimer.Common.csproj">
+      <Project>{091BA021-C276-4291-AF7D-4FEEBB4B2FD2}</Project>
+      <Name>NovaTimer.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Mac\Xamarin.Mac.CSharp.targets" />
 </Project>
