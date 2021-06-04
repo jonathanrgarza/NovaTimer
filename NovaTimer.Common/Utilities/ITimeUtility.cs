@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+
 namespace NovaTimer.Common.Utilities
 {
     /// <summary>
@@ -6,6 +8,11 @@ namespace NovaTimer.Common.Utilities
     /// </summary>
     public interface ITimeUtility
     {
+        /// <summary>
+        ///     The supported TimeSpan formats for parsing.
+        /// </summary>
+        IReadOnlyList<string> SupportedFormats { get; }
+
         /// <summary>
         ///     Tries to parse a given string into an appropriate
         ///     <see cref="TimeSpan"/>.
@@ -16,7 +23,7 @@ namespace NovaTimer.Common.Utilities
         /// <returns>
         ///     True if the parsing was successful, false otherwise.
         /// </returns>
-        public bool TryParseTimeSpan(string text, out TimeSpan timeSpan,
+        bool TryParseTimeSpan(string text, out TimeSpan timeSpan,
             out Exception ex);
     }
 }

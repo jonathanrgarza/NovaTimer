@@ -85,6 +85,25 @@ namespace NovaTimer.Mac.Controllers
                 return;
 
             string value = textField.StringValue;
+
+            if (string.IsNullOrEmpty(value))
+                return;
+            
+            if (TimeUtility.TryParseTimeSpan(value, out TimeSpan timeSpan,
+                out Exception ex) == false)
+            {
+                var alert = new NSAlert
+                {
+                    AlertStyle = NSAlertStyle.Informational,
+                    MessageText = $"{ex.Message}",
+                    InformativeText = "Please enter the time in the " +
+                    "format of: HH:MM:SS"
+                };
+
+                alert.BeginSheet(View.Window);
+                return;
+            }
+
             //TODO Do something with value
         }
 

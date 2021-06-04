@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Globalization;
 
 namespace NovaTimer.Common.Utilities
@@ -8,11 +10,22 @@ namespace NovaTimer.Common.Utilities
     /// </summary>
     public class TimeUtility : ITimeUtility
     {
+        private readonly string[] _supportedTimeFormats =
+        {
+            @"mm\:ss",
+            @"hh\:mm\:ss"
+        };
+
+        /// <inheritdoc/>
+        public IReadOnlyList<string> SupportedFormats { get; }
+
         /// <summary>
         ///     Initializes a new instance of <see cref="TimeUtility"/>.
         /// </summary>
         public TimeUtility()
         {
+            SupportedFormats =
+                new ReadOnlyCollection<string>(_supportedTimeFormats);
         }
 
         /// <inheritdoc/>
@@ -38,11 +51,7 @@ namespace NovaTimer.Common.Utilities
             }
 
             //Supported time formats
-            var formats = new string[]
-            {
-                "mm:ss",
-                "hh:mm:ss"
-            };
+            var formats = _supportedTimeFormats;
 
             var culture = CultureInfo.CurrentCulture;
             var result = TimeSpan.TryParseExact(text, formats, culture,

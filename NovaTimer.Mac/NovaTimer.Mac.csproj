@@ -91,6 +91,10 @@
       <DependentUpon>ViewController.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\VerticallyCenteredTextFieldCell.cs" />
+    <Compile Include="Controllers\WindowController.cs" />
+    <Compile Include="Controllers\WindowController.designer.cs">
+      <DependentUpon>WindowController.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Views\Main.storyboard" />
