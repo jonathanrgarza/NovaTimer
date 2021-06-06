@@ -92,6 +92,8 @@ namespace NovaTimer.Mac.Controllers
             if (TimeUtility.TryParseTimeSpan(value, out TimeSpan timeSpan,
                 out Exception ex) == false)
             {
+                SetErrorBorder(textField);
+
                 var alert = new NSAlert
                 {
                     AlertStyle = NSAlertStyle.Informational,
@@ -104,7 +106,34 @@ namespace NovaTimer.Mac.Controllers
                 return;
             }
 
+            SetNormalBorder(textField);
             //TODO Do something with value
+        }
+
+        private static void SetErrorBorder(NSTextField textField)
+        {
+            textField.WantsLayer = true;
+
+            var textFieldLayer = textField.Layer;
+            if (textFieldLayer == null)
+                return;
+
+            textFieldLayer.BorderColor = NSColor.FromRgb(255, 0, 0).CGColor;
+            textFieldLayer.BorderWidth = 1.0f;
+            textFieldLayer.CornerRadius = 0.0f;
+        }
+
+        private static void SetNormalBorder(NSTextField textField)
+        {
+            textField.WantsLayer = false;
+
+            var textFieldLayer = textField.Layer;
+            if (textFieldLayer == null)
+                return;
+
+            textFieldLayer.BorderColor = NSColor.Black.CGColor;
+            textFieldLayer.BorderWidth = 0;
+            textFieldLayer.CornerRadius = 0.0f;
         }
 
         /// <summary>
