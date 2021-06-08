@@ -112,15 +112,7 @@ namespace NovaTimer.Mac.Controllers
 
         private static void SetErrorBorder(NSTextField textField)
         {
-            textField.WantsLayer = true;
-
-            var textFieldLayer = textField.Layer;
-            if (textFieldLayer == null)
-                return;
-
-            textFieldLayer.BorderColor = NSColor.FromRgb(255, 0, 0).CGColor;
-            textFieldLayer.BorderWidth = 1.0f;
-            textFieldLayer.CornerRadius = 0.0f;
+            
         }
 
         private static void SetNormalBorder(NSTextField textField)

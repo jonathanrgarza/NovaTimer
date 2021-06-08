@@ -8,7 +8,7 @@ namespace NovaTimer.Mac.Controls
     /// <summary>
     ///     A textfield cell which vertically centers it text.
     /// </summary>
-    [Register("VerticallyCenteredTextFieldCell")]
+    [Register(nameof(VerticallyCenteredTextFieldCell))]
     public class VerticallyCenteredTextFieldCell : NSTextFieldCell
     {
         private bool _isEditingOrSelecting;
