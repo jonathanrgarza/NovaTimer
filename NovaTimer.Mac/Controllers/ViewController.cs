@@ -2,7 +2,9 @@
 
 using AppKit;
 using Foundation;
+using NovaTimer.Common.Infrastructure;
 using NovaTimer.Common.Utilities;
+using NovaTimer.Mac.Controls;
 
 namespace NovaTimer.Mac.Controllers
 {
@@ -81,7 +83,7 @@ namespace NovaTimer.Mac.Controllers
         /// <param name="sender">The sending object.</param>
         partial void OnTimerFieldEnter(NSObject sender)
         {
-            if (sender is not NSTextField textField)
+            if (sender is not ValidatableTextField textField)
                 return;
 
             string value = textField.StringValue;
@@ -110,22 +112,14 @@ namespace NovaTimer.Mac.Controllers
             //TODO Do something with value
         }
 
-        private static void SetErrorBorder(NSTextField textField)
+        private static void SetErrorBorder(ValidatableTextField textField)
         {
-            
+            textField.ValidationState = ValidationState.Error;
         }
 
-        private static void SetNormalBorder(NSTextField textField)
+        private static void SetNormalBorder(ValidatableTextField textField)
         {
-            textField.WantsLayer = false;
-
-            var textFieldLayer = textField.Layer;
-            if (textFieldLayer == null)
-                return;
-
-            textFieldLayer.BorderColor = NSColor.Black.CGColor;
-            textFieldLayer.BorderWidth = 0;
-            textFieldLayer.CornerRadius = 0.0f;
+            textField.ValidationState = ValidationState.None;
         }
 
         /// <summary>
