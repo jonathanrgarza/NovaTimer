@@ -18,6 +18,8 @@ namespace NovaTimer.Mac.Controls
 
         /// <summary>
         ///     Gets/Sets the validation state.
+        ///     Using this to set the state will set the
+        ///     message/tooltip to an empty string.
         /// </summary>
         public ValidationState ValidationState
         {
@@ -126,41 +128,17 @@ namespace NovaTimer.Mac.Controls
 
         protected virtual void ShowErrorState()
         {
-            WantsLayer = true;
-
-            var layer = Layer;
-            if (layer == null)
-                return;
-
-            layer.BorderColor = ColorConstants.ErrorCG;
-            layer.BorderWidth = 1.0f;
-            layer.CornerRadius = 0.0f;
+            SetCommonBorder(ColorConstants.ErrorCG);
         }
 
         protected virtual void ShowWarningState()
         {
-            WantsLayer = true;
-
-            var layer = Layer;
-            if (layer == null)
-                return;
-
-            layer.BorderColor = ColorConstants.WarningCG;
-            layer.BorderWidth = 1.0f;
-            layer.CornerRadius = 0.0f;
+            SetCommonBorder(ColorConstants.WarningCG);
         }
 
         protected virtual void ShowInfoState()
         {
-            WantsLayer = true;
-
-            var layer = Layer;
-            if (layer == null)
-                return;
-
-            layer.BorderColor = ColorConstants.InfoCG;
-            layer.BorderWidth = 1.0f;
-            layer.CornerRadius = 0.0f;
+            SetCommonBorder(ColorConstants.InfoCG);
         }
 
         protected virtual void ShowValidState()
@@ -171,15 +149,7 @@ namespace NovaTimer.Mac.Controls
                 return;
             }
 
-            WantsLayer = true;
-
-            var layer = Layer;
-            if (layer == null)
-                return;
-
-            layer.BorderColor = ColorConstants.ValidCG;
-            layer.BorderWidth = 1.0f;
-            layer.CornerRadius = 0.0f;
+            SetCommonBorder(ColorConstants.ValidCG);
         }
 
         protected virtual void ShowDefaultState()
@@ -192,6 +162,19 @@ namespace NovaTimer.Mac.Controls
 
             layer.BorderColor = ColorConstants.DefaultCG;
             layer.BorderWidth = 0.0f;
+            layer.CornerRadius = 0.0f;
+        }
+
+        protected virtual void SetCommonBorder(CoreGraphics.CGColor borderColor)
+        {
+            WantsLayer = true;
+
+            var layer = Layer;
+            if (layer == null)
+                return;
+
+            layer.BorderColor = borderColor;
+            layer.BorderWidth = 1.0f;
             layer.CornerRadius = 0.0f;
         }
     }
