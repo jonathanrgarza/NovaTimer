@@ -71,8 +71,10 @@ namespace NovaTimer.Common.Utilities
         {
             ex = null;
 
+            var secondsFormats = new string[] { "ss", "s" };
+
             var culture = CultureInfo.CurrentCulture;
-            var result = TimeSpan.TryParseExact(text, "ss", culture,
+            var result = TimeSpan.TryParseExact(text, secondsFormats, culture,
                 out timeSpan);
 
             if (result == false)

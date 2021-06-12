@@ -89,7 +89,10 @@ namespace NovaTimer.Mac.Controllers
             string value = textField.StringValue;
 
             if (string.IsNullOrEmpty(value))
+            {
+                SetNormalBorder(textField);
                 return;
+            }
             
             if (TimeUtility.TryParseTimeSpan(value, out TimeSpan timeSpan,
                 out Exception ex) == false)
@@ -133,6 +136,8 @@ namespace NovaTimer.Mac.Controllers
                 return;
 
             int value = textField.IntValue;
+
+            var timeSpan = TimeSpan.FromMinutes(value);
             //TODO Do something with value
         }
 
