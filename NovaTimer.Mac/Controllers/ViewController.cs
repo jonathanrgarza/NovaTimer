@@ -4,6 +4,7 @@ using AppKit;
 using Foundation;
 using NovaTimer.Common.Infrastructure;
 using NovaTimer.Common.Utilities;
+using NovaTimer.Mac.Contants;
 using NovaTimer.Mac.Controls;
 
 namespace NovaTimer.Mac.Controllers
@@ -97,17 +98,19 @@ namespace NovaTimer.Mac.Controllers
             if (TimeUtility.TryParseTimeSpan(value, out TimeSpan timeSpan,
                 out Exception ex) == false)
             {
-                SetErrorBorder(textField);
+                var valResult = new ValidationResult(
+                    $"{ex.Message}\n{StringConstants.TimeFormatError}",
+                    ValidationState.Error);
+                SetTextFieldState(textField, valResult);
 
-                var alert = new NSAlert
-                {
-                    AlertStyle = NSAlertStyle.Informational,
-                    MessageText = $"{ex.Message}",
-                    InformativeText = "Please enter the time in the " +
-                    "format of: HH:MM:SS"
-                };
+                //var alert = new NSAlert
+                //{
+                //    AlertStyle = NSAlertStyle.Informational,
+                //    MessageText = $"{ex.Message}",
+                //    InformativeText = StringConstants.TimeFormatError
+                //};
 
-                alert.BeginSheet(View.Window);
+                //alert.BeginSheet(View.Window);
                 return;
             }
 
@@ -115,14 +118,15 @@ namespace NovaTimer.Mac.Controllers
             //TODO Do something with value
         }
 
-        private static void SetErrorBorder(ValidatableTextField textField)
+        private static void SetTextFieldState(ValidatableTextField textField,
+            ValidationResult result)
         {
-            textField.ValidationState = ValidationState.Error;
+            textField.ValidationResult = result;
         }
 
         private static void SetNormalBorder(ValidatableTextField textField)
         {
-            textField.ValidationState = ValidationState.None;
+            textField.ValidationResult = ValidationResult.Valid;
         }
 
         /// <summary>

@@ -98,6 +98,7 @@
     </Compile>
     <Compile Include="Controls\ValidatableTextField.cs" />
     <Compile Include="Contants\ColorConstants.cs" />
+    <Compile Include="Contants\StringConstants.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Views\Main.storyboard" />

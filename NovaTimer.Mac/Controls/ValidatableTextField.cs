@@ -14,20 +14,38 @@ namespace NovaTimer.Mac.Controls
     {
         protected bool _showValidAsDefault = true;
 
-        protected ValidationState _validationState;
-        
+        protected ValidationResult _validationResult;
+
         /// <summary>
         ///     Gets/Sets the validation state.
         /// </summary>
         public ValidationState ValidationState
         {
-            get => _validationState;
+            get => _validationResult?.State ?? ValidationState.None;
             set
             {
-                if (_validationState == value)
+                if (_validationResult != null &&
+                    _validationResult.State == value)
                     return;
 
-                _validationState = value;
+                _validationResult = new(string.Empty, value);
+
+                UpdateValidationVisual();
+            }
+        }
+
+        /// <summary>
+        ///     Gets/Sets the validation result.
+        /// </summary>
+        public ValidationResult ValidationResult
+        {
+            get => _validationResult;
+            set
+            {
+                if (_validationResult == value)
+                    return;
+
+                _validationResult = value;
 
                 UpdateValidationVisual();
             }
@@ -49,7 +67,7 @@ namespace NovaTimer.Mac.Controls
 
                 _showValidAsDefault = value;
 
-                if (_validationState != ValidationState.Valid)
+                if (ValidationState != ValidationState.Valid)
                     return;
 
                 //Update the visual since value change
@@ -102,6 +120,8 @@ namespace NovaTimer.Mac.Controls
                 default:
                     throw new InvalidOperationException($"{nameof(ValidationState)} has an unsupported value: {ValidationState}");
             }
+
+            ToolTip = _validationResult?.Message;
         }
 
         protected virtual void ShowErrorState()
