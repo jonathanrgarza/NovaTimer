@@ -91,7 +91,7 @@ namespace NovaTimer.Mac.Controllers
 
             if (string.IsNullOrEmpty(value))
             {
-                SetNormalBorder(textField);
+                SetNormalState(textField);
                 return;
             }
             
@@ -114,7 +114,7 @@ namespace NovaTimer.Mac.Controllers
                 return;
             }
 
-            SetNormalBorder(textField);
+            SetNormalState(textField);
             //TODO Do something with value
         }
 
@@ -124,7 +124,7 @@ namespace NovaTimer.Mac.Controllers
             textField.ValidationResult = result;
         }
 
-        private static void SetNormalBorder(ValidatableTextField textField)
+        private static void SetNormalState(ValidatableTextField textField)
         {
             textField.ValidationResult = ValidationResult.Valid;
         }

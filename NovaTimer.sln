@@ -28,4 +28,10 @@ Global
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {218FD6A0-0CAD-4CB0-B216-E73C7013C40C}
 	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		Policies = $0
+		$0.VersionControlPolicy = $1
+		$1.CommitMessageStyle = $2
+		$2.LastFilePostfix = "@:\n  "
+	EndGlobalSection
 EndGlobal
