@@ -19,7 +19,11 @@ namespace NovaTimer.Common.Utilities
         /// </summary>
         /// <param name="text">The text to parse.</param>
         /// <param name="timeSpan">The parsed <see cref="TimeSpan"/>.</param>
-        /// <param name="ex">The exception when parsing failed.</param>
+        /// <param name="ex">
+        ///     The exception when parsing failed.
+        ///     Can be an <see cref="ArgumentException"/> or
+        ///     a <see cref="FormatException"/>.
+        /// </param>
         /// <returns>
         ///     True if the parsing was successful, false otherwise.
         /// </returns>

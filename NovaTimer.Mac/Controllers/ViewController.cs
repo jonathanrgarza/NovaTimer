@@ -94,7 +94,7 @@ namespace NovaTimer.Mac.Controllers
                 SetNormalState(textField);
                 return;
             }
-            
+
             if (TimeUtility.TryParseTimeSpan(value, out TimeSpan timeSpan,
                 out Exception ex) == false)
             {
