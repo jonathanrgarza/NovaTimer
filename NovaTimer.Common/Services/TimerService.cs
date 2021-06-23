@@ -89,5 +89,15 @@ namespace NovaTimer.Common.Services
             StateChanged?.Invoke(this,
                 new ValueChangedEventArgs<ServiceState>(oldValue, newValue));
         }
+
+        private void OnTick(TimeSpan timeRemaining)
+        {
+            Tick?.Invoke(this, timeRemaining);
+        }
+
+        private void OnStateChanged()
+        {
+            Completed?.Invoke(this, EventArgs.Empty);
+        }
     }
 }
