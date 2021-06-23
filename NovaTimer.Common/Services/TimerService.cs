@@ -8,47 +8,86 @@ namespace NovaTimer.Common.Services
     /// </summary>
     public class TimerService : ITimerService
     {
+        private ServiceState _state;
+
+        /// <summary>
+        ///     Initializes a new instance of <see cref="TimerService"/>.
+        /// </summary>
         public TimerService()
         {
         }
 
-        public ServiceState State => throw new NotImplementedException();
+        /// <inheritdoc/>
+        public ServiceState State
+        {
+            get => _state;
+            set
+            {
+                if (_state == value)
+                    return;
 
-        public bool IsRunning => throw new NotImplementedException();
+                var oldValue = _state;
+                _state = value;
 
-        public bool IsComplete => throw new NotImplementedException();
+                OnStateChanged(oldValue, _state);
+            }
+        }
 
-        public TimeSpan InitialTimeSpan => throw new NotImplementedException();
+        /// <inheritdoc/>
+        public bool IsRunning => _state == ServiceState.Running;
 
-        public TimeSpan TimeRemaining => throw new NotImplementedException();
+        /// <inheritdoc/>
+        public bool IsComplete { get; private set; }
 
+        /// <inheritdoc/>
+        public TimeSpan InitialTimeSpan { get; private set; }
+
+        /// <inheritdoc/>
+        public TimeSpan TimeRemaining { get; private set; }
+
+        /// <inheritdoc/>
         public event EventHandler<ValueChangedEventArgs<ServiceState>> StateChanged;
+
+        /// <inheritdoc/>
         public event EventHandler<TimeSpan> Tick;
+
+        /// <inheritdoc/>
         public event EventHandler Completed;
 
+        /// <inheritdoc/>
         public void Initialize(TimeSpan time)
         {
             throw new NotImplementedException();
         }
 
+        /// <inheritdoc/>
         public bool Pause()
         {
             throw new NotImplementedException();
         }
 
+        /// <inheritdoc/>
         public bool Play()
         {
             throw new NotImplementedException();
         }
 
+        /// <inheritdoc/>
         public void Reset()
         {
             throw new NotImplementedException();
         }
 
+        /// <inheritdoc/>
         public bool Stop()
         {
             throw new NotImplementedException();
+        }
+
+        private void OnStateChanged(ServiceState oldValue, ServiceState newValue)
+        {
+            StateChanged?.Invoke(this,
+                new ValueChangedEventArgs<ServiceState>(oldValue, newValue));
         }
     }
 }
