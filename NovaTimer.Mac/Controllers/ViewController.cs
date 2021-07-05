@@ -95,14 +95,21 @@ namespace NovaTimer.Mac.Controllers
 
         private void TimerService_StateChanged(object sender, ValueChangedEventArgs<ServiceState> e)
         {
+            
             var newState = e.NewValue;
 
             if (newState == ServiceState.Running)
             {
-                TimerField.Enabled = false;
+                InvokeUIAction(() =>
+                {
+                    TimerField.Editable = false;
+                });
             }
 
-            TimerField.Enabled = true;
+            InvokeUIAction(() =>
+            {
+                TimerField.Editable = true;
+            });
         }
 
         private void TimerService_Completed(object sender, EventArgs e)
@@ -112,7 +119,7 @@ namespace NovaTimer.Mac.Controllers
 
         private void TimerService_Tick(object sender, TimeSpan e)
         {
-            TimerField.InvokeOnMainThread(() =>
+            InvokeUIAction(() =>
             {
                 var newText = e.ToString();
                 TimerField.StringValue = newText;
@@ -205,6 +212,11 @@ namespace NovaTimer.Mac.Controllers
             }
 
             TimerService.Pause();
+        }
+
+        private void InvokeUIAction(Action action)
+        {
+            TimerField.InvokeOnMainThread(action);
         }
 
         /// <summary>
