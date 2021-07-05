@@ -46,7 +46,7 @@ namespace NovaTimer.Common.Services
         /// <summary>
         ///     Gets the remaining time.
         /// </summary>
-        TimeSpan TimeRemaining { get; }
+        TimeSpan RemainingTime { get; }
 
         /// <summary>
         ///     Initalizes the service with a given time.
@@ -75,7 +75,7 @@ namespace NovaTimer.Common.Services
         bool Pause();
 
         /// <summary>
-        ///     Stops the timer and resets the <see cref="TimeRemaining"/>.
+        ///     Stops the timer and resets the <see cref="RemainingTime"/>.
         /// </summary>
         /// <returns>True if the timer is now stopped, false if error.</returns>
         bool Stop();

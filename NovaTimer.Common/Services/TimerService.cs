@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using NovaTimer.Common.Infrastructure;
 
 namespace NovaTimer.Common.Services
@@ -8,13 +9,22 @@ namespace NovaTimer.Common.Services
     /// </summary>
     public class TimerService : ITimerService
     {
+        private const string ServiceRunningErrorMsg = "Service is currently running";
+
         private ServiceState _state;
+
+        private Timer _timer;
+        private bool _isComplete;
+
+        private const int Second = 1000;
+        private readonly TimeSpan SecondTS = TimeSpan.FromSeconds(1);
 
         /// <summary>
         ///     Initializes a new instance of <see cref="TimerService"/>.
         /// </summary>
         public TimerService()
         {
+            Reset();
         }
 
         /// <inheritdoc/>
@@ -37,13 +47,28 @@ namespace NovaTimer.Common.Services
         public bool IsRunning => _state == ServiceState.Running;
 
         /// <inheritdoc/>
-        public bool IsComplete { get; private set; }
+        public bool IsComplete
+        {
+            get => _isComplete;
+            private set
+            {
+                if (_isComplete == value)
+                    return;
+
+                _isComplete = value;
+
+                if (_isComplete)
+                {
+                    OnCompleted();
+                }
+            }
+        }
 
         /// <inheritdoc/>
         public TimeSpan InitialTimeSpan { get; private set; }
 
         /// <inheritdoc/>
-        public TimeSpan TimeRemaining { get; private set; }
+        public TimeSpan RemainingTime { get; private set; }
 
         /// <inheritdoc/>
         public event EventHandler<ValueChangedEventArgs<ServiceState>> StateChanged;
@@ -57,31 +82,85 @@ namespace NovaTimer.Common.Services
         /// <inheritdoc/>
         public void Initialize(TimeSpan time)
         {
-            throw new NotImplementedException();
-        }
+            if (_state == ServiceState.Running)
+                throw new InvalidOperationException(ServiceRunningErrorMsg);
 
-        /// <inheritdoc/>
-        public bool Pause()
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc/>
-        public bool Play()
-        {
-            throw new NotImplementedException();
+            IsComplete = false;
+            InitialTimeSpan = time;
+            RemainingTime = time;
+            State = ServiceState.Initialized;
         }
 
         /// <inheritdoc/>
         public void Reset()
         {
-            throw new NotImplementedException();
+            if (_state == ServiceState.Running)
+                throw new InvalidOperationException(ServiceRunningErrorMsg);
+
+            _timer?.Dispose();
+            _timer = null;
+            InitialTimeSpan = TimeSpan.Zero;
+            RemainingTime = TimeSpan.Zero;
+            IsComplete = false;
+            State = ServiceState.Uninitialized;
+        }
+
+        /// <inheritdoc/>
+        public bool Pause()
+        {
+            if (_state != ServiceState.Running)
+                return false;
+
+            _timer?.Dispose();
+            _timer = null;
+            State = ServiceState.Paused;
+
+            return true;
+        }
+
+        /// <inheritdoc/>
+        public bool Play()
+        {
+            if (_state == ServiceState.Running || _state == ServiceState.Uninitialized)
+                return false;
+
+            //Check if any time remaining
+            if (RemainingTime <= TimeSpan.Zero)
+                return false;
+
+            _timer = new Timer(TickHandler, null, Second, Second);
+            State = ServiceState.Running;
+
+            return true;
         }
 
         /// <inheritdoc/>
         public bool Stop()
         {
-            throw new NotImplementedException();
+            if (_state == ServiceState.Stopped || _state == ServiceState.Uninitialized)
+                return false;
+
+            _timer?.Dispose();
+            _timer = null;
+
+            RemainingTime = InitialTimeSpan;
+            OnTick(RemainingTime); //Allow an update of the time visible
+            State = ServiceState.Stopped;
+
+            return true;
+        }
+
+        private void TickHandler(object state)
+        {
+            var newTime = RemainingTime.Subtract(SecondTS);
+            RemainingTime = newTime;
+            OnTick(newTime);
+
+            if (newTime <= TimeSpan.Zero)
+            {
+                Pause();
+                IsComplete = true;
+            }
         }
 
         private void OnStateChanged(ServiceState oldValue, ServiceState newValue)
@@ -95,7 +174,7 @@ namespace NovaTimer.Common.Services
             Tick?.Invoke(this, timeRemaining);
         }
 
-        private void OnStateChanged()
+        private void OnCompleted()
         {
             Completed?.Invoke(this, EventArgs.Empty);
         }

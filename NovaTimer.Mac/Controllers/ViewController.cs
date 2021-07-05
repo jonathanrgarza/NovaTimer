@@ -3,6 +3,7 @@
 using AppKit;
 using Foundation;
 using NovaTimer.Common.Infrastructure;
+using NovaTimer.Common.Services;
 using NovaTimer.Common.Utilities;
 using NovaTimer.Mac.Contants;
 using NovaTimer.Mac.Controls;
@@ -25,6 +26,11 @@ namespace NovaTimer.Mac.Controllers
         ///     The time utility.
         /// </summary>
         public ITimeUtility TimeUtility { get; private set; }
+
+        /// <summary>
+        ///     The timer service.
+        /// </summary>
+        public ITimerService TimerService { get; private set; }
 
         /// <summary>
         ///     The object whose value is presented in the receiver’s
@@ -66,6 +72,7 @@ namespace NovaTimer.Mac.Controllers
 
             // Do any additional setup after loading the view.
             SetupDependencies();
+            SetupEvents();
         }
 
         /// <summary>
@@ -76,6 +83,40 @@ namespace NovaTimer.Mac.Controllers
             var app = App;
 
             TimeUtility = app.Container.GetInstance<ITimeUtility>();
+            TimerService = app.Container.GetInstance<ITimerService>();
+        }
+
+        private void SetupEvents()
+        {
+            TimerService.StateChanged += TimerService_StateChanged;
+            TimerService.Tick += TimerService_Tick;
+            TimerService.Completed += TimerService_Completed;
+        }
+
+        private void TimerService_StateChanged(object sender, ValueChangedEventArgs<ServiceState> e)
+        {
+            var newState = e.NewValue;
+
+            if (newState == ServiceState.Running)
+            {
+                TimerField.Enabled = false;
+            }
+
+            TimerField.Enabled = true;
+        }
+
+        private void TimerService_Completed(object sender, EventArgs e)
+        {
+            //TODO: Finish implementation
+        }
+
+        private void TimerService_Tick(object sender, TimeSpan e)
+        {
+            TimerField.InvokeOnMainThread(() =>
+            {
+                var newText = e.ToString();
+                TimerField.StringValue = newText;
+            });
         }
 
         /// <summary>
@@ -115,18 +156,24 @@ namespace NovaTimer.Mac.Controllers
             }
 
             SetNormalState(textField);
-            //TODO Do something with value
+            InitializeTimerService(timeSpan);
         }
 
-        private static void SetTextFieldState(ValidatableTextField textField,
-            ValidationResult result)
+        private void InitializeTimerService(TimeSpan timeSpan)
         {
-            textField.ValidationResult = result;
-        }
+            if (TimerService.IsRunning)
+            {
+                var alert = new NSAlert
+                {
+                    AlertStyle = NSAlertStyle.Informational,
+                    MessageText = "Timer service is already running! Can not start new timer.",
+                };
 
-        private static void SetNormalState(ValidatableTextField textField)
-        {
-            textField.ValidationResult = ValidationResult.Valid;
+                alert.RunModal();
+                return;
+            }
+
+            TimerService.Initialize(timeSpan);
         }
 
         /// <summary>
@@ -142,7 +189,7 @@ namespace NovaTimer.Mac.Controllers
             int value = textField.IntValue;
 
             var timeSpan = TimeSpan.FromMinutes(value);
-            //TODO Do something with value
+            InitializeTimerService(timeSpan);
         }
 
         /// <summary>
@@ -151,7 +198,13 @@ namespace NovaTimer.Mac.Controllers
         /// <param name="sender">The sending object.</param>
         partial void OnToolbarPlayToggleButtonPressed(NSObject sender)
         {
-            throw new NotImplementedException();
+            if (TimerService.IsRunning == false)
+            {
+                TimerService.Play();
+                return;
+            }
+
+            TimerService.Pause();
         }
 
         /// <summary>
@@ -160,7 +213,18 @@ namespace NovaTimer.Mac.Controllers
         /// <param name="sender">The sending object.</param>
         partial void OnToolbarStopButtonPressed(NSObject sender)
         {
-            throw new NotImplementedException();
+            TimerService.Stop();
+        }
+
+        private static void SetTextFieldState(ValidatableTextField textField,
+            ValidationResult result)
+        {
+            textField.ValidationResult = result;
+        }
+
+        private static void SetNormalState(ValidatableTextField textField)
+        {
+            textField.ValidationResult = ValidationResult.Valid;
         }
     }
 }

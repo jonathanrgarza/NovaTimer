@@ -1,5 +1,6 @@
 ﻿using AppKit;
 using Foundation;
+using NovaTimer.Common.Services;
 using NovaTimer.Common.Utilities;
 using SimpleInjector;
 
@@ -91,6 +92,7 @@ namespace NovaTimer.Mac
             var container = new Container();
 
             container.Register<ITimeUtility, TimeUtility>(Lifestyle.Singleton);
+            container.Register<ITimerService, TimerService>(Lifestyle.Singleton);
 
             container.Verify();
 
